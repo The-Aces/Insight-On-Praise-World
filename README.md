@@ -7,6 +7,6 @@ This application is basically based on the day-to-day activities of the way my e
 - Things around.
 - Weather activities.
 - Seasons.
-- Wind.
+- Wind. 
 - Events.
 - Climate and much more.
