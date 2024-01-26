@@ -13,7 +13,7 @@ class SocialsController extends Controller
 
         $data = [ 'user' => $user ];
 
-        dd($user);
+        // dd($user);
 
         return $data;
     }
