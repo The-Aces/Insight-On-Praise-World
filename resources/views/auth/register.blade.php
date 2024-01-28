@@ -16,6 +16,27 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Phone Number -->
+        <div class="mt-4">
+            <x-input-label for="phone" :value="__('Phone Number')" />
+            <x-text-input id="phone" class="block mt-1 w-full" type="phone" name="phone" :value="old('phone')" required autocomplete="phone" />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        </div>
+
+        <!-- Country -->
+        <div class="mt-4">
+            <x-input-label for="country" :value="__('Country')" />
+            <x-text-input id="country" class="block mt-1 w-full" type="country" name="country" :value="old('country')" required autocomplete="country" />
+            <x-input-error :messages="$errors->get('country')" class="mt-2" />
+        </div>
+
+        <!-- State -->
+        <div class="mt-4">
+            <x-input-label for="state" :value="__('State')" />
+            <x-text-input id="state" class="block mt-1 w-full" type="state" name="state" :value="old('state')" required autocomplete="state" />
+            <x-input-error :messages="$errors->get('state')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />

@@ -13,6 +13,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        {{-- Adding Bootstrap --}}
+        {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -32,5 +37,11 @@
                 {{ $slot }}
             </main>
         </div>
+
+
+        
+
+         {{-- Adding Sweet Alerts --}}
+         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     </body>
 </html>
