@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+
+
 
 class RegisteredUserController extends Controller
 {
@@ -30,31 +34,58 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'phone' => ['required', 'integer', 'phone', 'max:255'],
-            'country' => ['required', 'string', 'country', 'max:255'],
-            'state' => ['required', 'string', 'state', 'max:255'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        try {
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'country' => $request->country,
-            'state' => $request->state,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+            if(!isset($request->name)) throw new \Error("Please provide fullname");
+            
+            
+            $req['firstname'] = explode(" ", $request->name)[0];
+            $req['lastname'] = explode(" ", $request->name)[1];
         
+
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+                'phone' => ['required', 'integer', 'phone', 'max:255'],
+                'country' => ['required', 'string', 'country', 'max:255'],
+                'state' => ['required', 'string', 'state', 'max:255'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'country' => $request->country,
+                'state' => $request->state,
+                'password' => Hash::make($request->password),
+            ]);
+
+            dd($request->all());
+
+            event(new Registered($user));
+
+            Auth::login($user);
+
+            return redirect(RouteServiceProvider::HOME);
+
+        } catch (\Throwable $th) {
+            // $status = 500;
+            // $resData = [ 'status' => $status, 'data' => [], 'message' => $th->getMessage()];
+
+            $th->getMessage();
+            
+            throw $th;
+        }
+
+
     }
 
+
+    // public function returnJSON($data, $status)
+    // {
+
+    //     return response($data, $status)->header('Content-Type', 'application/json');
+    // }
 
 }
