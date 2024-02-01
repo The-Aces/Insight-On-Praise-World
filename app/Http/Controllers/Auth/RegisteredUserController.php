@@ -43,23 +43,47 @@ class RegisteredUserController extends Controller
             $req['lastname'] = explode(" ", $request->name)[1];
         
 
-            $request->validate([
+            // $request->validate([
+            //     'name' => ['required', 'string', 'max:255'],
+            //     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            //     // 'phone' => ['required', 'integer', 'phone', 'max:255'],
+            //     // 'country' => ['required', 'string', 'country', 'max:255'],
+            //     // 'state' => ['required', 'string', 'state', 'max:255'],
+            //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            // ]);
+
+            $validator = Validator::make($request, [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-                // 'phone' => ['required', 'integer', 'phone', 'max:255'],
-                // 'country' => ['required', 'string', 'country', 'max:255'],
-                // 'state' => ['required', 'string', 'state', 'max:255'],
+                'phone' => ['required', 'integer', 'phone', 'max:255'],
+                'country' => ['required', 'string', 'country', 'max:255'],
+                'state' => ['required', 'string', 'state', 'max:255'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
 
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                // 'phone' => $request->phone,
-                // 'country' => $request->country,
-                // 'state' => $request->state,
-                'password' => Hash::make($request->password),
-            ]);
+            if ($validator->passes()) { 
+
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'country' => $request->country,
+                    'state' => $request->state,
+                    'password' => Hash::make($request->password),
+                ]);
+            } else {
+                $nophoneYet = 78423823;
+                $justRoughly = 'nullDatas';
+
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $nophoneYet,
+                    'country' => $justRoughly,
+                    'state' => $justRoughly,
+                    'password' => Hash::make($request->password),
+                ]);
+            }
 
 
             event(new Registered($user));
