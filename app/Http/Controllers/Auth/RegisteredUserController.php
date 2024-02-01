@@ -72,7 +72,7 @@ class RegisteredUserController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
             } else {
-                
+
                 $nophoneYet = 78423823;
                 $justRoughly = 'nullDatas';
 
@@ -94,6 +94,7 @@ class RegisteredUserController extends Controller
             return redirect(RouteServiceProvider::HOME);
 
         } catch (\Throwable $th) {
+            
             // $status = 500;
             // $resData = [ 'status' => $status, 'data' => [], 'message' => $th->getMessage()];
 
