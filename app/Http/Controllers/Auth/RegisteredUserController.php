@@ -72,6 +72,7 @@ class RegisteredUserController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
             } else {
+                
                 $nophoneYet = 78423823;
                 $justRoughly = 'nullDatas';
 
