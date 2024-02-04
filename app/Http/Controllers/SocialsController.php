@@ -9,13 +9,9 @@ class SocialsController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        $userData = Auth::user();
 
-        $data = [ 'user' => $user ];
-
-        // dd($user);
-
-        return $data;
+        return view('socialmedia.index')->with(['userData' => $userData]);
     }
 
     

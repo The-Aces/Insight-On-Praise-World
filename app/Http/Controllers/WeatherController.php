@@ -9,11 +9,9 @@ class WeatherController extends Controller
 {
     public function index ()
     {
-        $user = Auth::user();
+        $userData = Auth::user();
 
-        $data = [ 'user' => $user];
-
-        return $data;
+        return view('weather.index')->with(['userData' => $userData]);
     }
 
     

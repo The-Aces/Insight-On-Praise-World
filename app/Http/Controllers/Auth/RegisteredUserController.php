@@ -36,17 +36,19 @@ class RegisteredUserController extends Controller
     {
         try {
 
-            if(!isset($request->name)) throw new \Error("Please provide fullname");
-            
-            
-            $req['firstname'] = explode(" ", $request->name)[0];
-            $req['lastname'] = explode(" ", $request->name)[1];
-        
-
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'country' => $request->country,
+                'state' => $request->state,
+                'password' => Hash::make($request->password),
             ]);
 
             // $validator = Validator::make($request, [
@@ -57,28 +59,10 @@ class RegisteredUserController extends Controller
 
             // if ($validator->passes()) { 
 
-                $user = User::create([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'phone' => $request->phone,
-                    'country' => $request->country,
-                    'state' => $request->state,
-                    'password' => Hash::make($request->password),
-                ]);
+                
 
             // } else {
-
-            //     // $nophoneYet = 78423823;
-            //     // $justRoughly = 'nullDatas';
-
-            //     $user = User::create([
-            //         'name' => $request->name,
-            //         'email' => $request->email,
-            //         // 'phone' => $nophoneYet,
-            //         // 'country' => $justRoughly,
-            //         // 'state' => $justRoughly,
-            //         'password' => Hash::make($request->password),
-            //     ]);
+                    
             // }
 
 

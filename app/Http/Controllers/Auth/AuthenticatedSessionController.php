@@ -31,8 +31,6 @@ class AuthenticatedSessionController extends Controller
 
         $userData = Auth::user();
 
-        // dd($userData);
-
         return redirect()->intended(RouteServiceProvider::HOME)->with([ 'userData' => $userData ]);
     }
 

@@ -9,10 +9,8 @@ class CalendersController extends Controller
 {
     public function index ()
     {
-        $user = Auth::user();
+        $userData = Auth::user();
 
-        $data = [ 'user' => $user ];
-
-        return $data;
+        return view('calender.index')->with(['userData' => $userData]);
     }
 }
