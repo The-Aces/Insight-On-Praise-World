@@ -48,27 +48,27 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            $validator = Validator::make($request, [
-                'phone' => ['required', 'integer', 'phone', 'max:255'],
-                'country' => ['required', 'string', 'country', 'max:255'],
-                'state' => ['required', 'string', 'state', 'max:255'],
-            ]);
+            // $validator = Validator::make($request, [
+            //     'phone' => ['required', 'integer', 'phone', 'max:255'],
+            //     'country' => ['required', 'string', 'country', 'max:255'],
+            //     'state' => ['required', 'string', 'state', 'max:255'],
+            // ]);
 
-            if ($validator->passes()) { 
-                    $user = User::create([
-                        'name' => $request->name,
-                        'email' => $request->email,
-                        'phone' => $request->phone,
-                        'country' => $request->country,
-                        'state' => $request->state,
-                    ]);
-            } else {
-                $status = 500;
-                $message = 'Could not insert your details into our Serve';
-                $resData = ([ 'status' => $status, 'message' => $message]);
+            // if ($validator->passes()) { 
+            //         $user = User::create([
+            //             'name' => $request->name,
+            //             'email' => $request->email,
+            //             'phone' => $request->phone,
+            //             'country' => $request->country,
+            //             'state' => $request->state,
+            //         ]);
+            // } else {
+            //     $status = 500;
+            //     $message = 'Could not insert your details into our Serve';
+            //     $resData = ([ 'status' => $status, 'message' => $message]);
 
-                return $resData;
-            }
+            //     return $resData;
+            // }
 
 
             event(new Registered($user));
