@@ -4,7 +4,6 @@
 
 This application is basically based on the day-to-day activities of the way my everyday life goes ranging from:
 
-
 - Things around.
 - Your Social Media.
 - Weather activities.
@@ -12,5 +11,4 @@ This application is basically based on the day-to-day activities of the way my e
 - Wind. 
 - Events.
 - Climate and much more.
-
 
