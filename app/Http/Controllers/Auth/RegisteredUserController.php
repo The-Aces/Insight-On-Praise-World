@@ -34,8 +34,8 @@ class RegisteredUserController extends Controller
      */
 
     public function store(Request $request): RedirectResponse
-    {
-        try {
+    { 
+        try {  
 
             $request->validate([ 
                 'name' => ['required', 'string', 'max:255'],
